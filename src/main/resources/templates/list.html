@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="base:: headStuff"></head>
+
+<body>
+
+<div th:replace="base:: nav"></div>
+
+<div class="container bg-light">
+
+    <div class="my-5"></div>
+
+    <a href="/add">Add a Message</a><br />
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Posted Date</th>
+            <th>Posted By</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="message : ${messages}">
+            <td th:text="${message.title}"></td>
+            <td th:text="${message.postedDate}"></td>
+            <td th:text="${message.postedBy}"></td>
+
+            <div sec:authorize="hasAuthority('ADMIN')">
+                <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+            </div>
+            <div sec:authorize="hasAuthority('USER')">
+                <a th:href="@{/edit/{id}(id=${message.id})}">Edit</a>-
+                <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>
+            </div>
+        </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:replace="base:: footer"></div>
+</div>
+</body>
+</html>
