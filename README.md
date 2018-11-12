@@ -1,5 +1,7 @@
 # UpdatedSpringBootBullhorn
 
+Index page doesn't work under templates but application is still fine
+
 Didn't update application.properties using code below
 
 spring.datasource.url=jdbc:mysql://localhost:3306/messages
