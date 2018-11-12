@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.wthymeleaf.org/extras/spring-security">
-<head th:fragment="headStuff">
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="http://www.wthymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Bullhorn App</title>
+    <th:block th:fragment="headStuff">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
+</th:block>
 </head>
 <body>
 
@@ -15,20 +18,17 @@
         <!--own class navbar another class navbar-expand-sm, and bg-primary and navbar-dark another class-->
 
         <ul class="navbar-nav">
-            <!--<li class="nav-item" sec:authorize="isAuthenticated()">-->
-                <!--<a class="nav-link text-black" href="#">Welcome <span th:text="${#authentication.name}"></span></a>-->
-            <!--</li>-->
-            <li class="nav-item active">
-                <a sec:authorize = "!isAuthenticated()" class="nav-link text-black" href="/">Home</a>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-link text-black" href="/">Welcome <span th:text="${#authentication.name}"></span></a>
             </li>
-            <li class="nav-item">
-                <a sec:authorize="isAuthenticated()" class="nav-link text-black" href="/add">Messages</a>
+            <li class="nav-item active" sec:authorize = "!isAuthenticated()">
+                <a class="nav-link text-black"   href="/">Home</a>
             </li>
-            <li class="nav-item">
-                <a sec:authorize="!isAuthenticated()" class="nav-link text-black" href="/in">All Messages</a>
+            <li class="nav-item" sec:authorize="!isAuthenticated()"> <a class="nav-link text-black" href="/register">Register</a>
             </li>
-            <li class="nav-item">
-                <a sec:authorize="isAuthenticated()" class="nav-link text-black" href="/logout"></a>
+            <li class="nav-item" sec:authorize="!isAuthenticated()"> <a class="nav-link text-black" href="/add">Login</a>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()"> <a class="nav-link text-black" href="/logout">Logout</a>
             </li>
 
         </ul>
@@ -38,7 +38,6 @@
 
 <div th:fragment="footer">
     Copyright 2018
-</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -49,5 +48,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+
+
+</div>
+
 </body>
 </html>

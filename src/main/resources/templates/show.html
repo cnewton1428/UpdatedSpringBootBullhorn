@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org">
-<div th:replace="base:: headStuff"></div>
+<head><th:block th:replace="base:: headStuff"></th:block></div></head>
 
 <body>
 
 <div th:replace="base:: nav"></div>
 
-<a href="/in">View All Messages</a><br />
+
 Title :<span th:text="${message.title}" ></span><br />
 Content :<p th:text="${message.content}" ></p>
 Posted Date :<span th:text="${message.postedDate}" ></span><br />
@@ -14,5 +14,6 @@ Posted By :<span th:text="${message.postedBy}" ></span><br />
 
 <a href="/logout">Logout</a>
 
+<div th:replace ="base :: footer"></div>
 </body>
 </html>

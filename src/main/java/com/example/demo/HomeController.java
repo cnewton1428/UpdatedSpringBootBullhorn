@@ -33,11 +33,11 @@ public class HomeController {
     UserService userService;
 
     @RequestMapping("/")
-    public String index() {return "index";}
-
-    @RequestMapping("/in")
-    public String listMessages(Model model){
+    public String index(Model model) {
         model.addAttribute("messages", messageRepository.findAll());
+        if(userService.getUser() != null) {
+            model.addAttribute("user_id", userService.getUser().getId());
+        }
         return "list";
     }
 
@@ -52,6 +52,7 @@ public class HomeController {
         if (result.hasErrors()){
             return "messageform";
         }
+        message.setUser(userService.getUser());
         messageRepository.save(message);
         return "redirect:/";
     }
@@ -73,20 +74,21 @@ public class HomeController {
             userService.saveUser(user);
             model.addAttribute("message", "User Account Created");
         }
-        return "index";
+//        return "redirect:/";
+        return "display";
     }
 
     @RequestMapping("/login")
     public String login(){
         return "login";
     }
-
-    @RequestMapping("/secure")
-    public String secure(Principal principal, Model model){
-        User myuser = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
-        model.addAttribute("myuser", myuser);
-        return "secure";
-    }
+//
+//    @RequestMapping("/secure")
+//    public String secure(Principal principal, Model model){
+//        User myuser = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+//        model.addAttribute("myuser", myuser);
+//        return "secure";
+//    }
 
     @RequestMapping("/detail/{id}")
     public String showMessage(@PathVariable("id") long id, Model model){
